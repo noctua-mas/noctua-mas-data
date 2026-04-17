@@ -24,4 +24,4 @@ jobs:
 
           git branch -M main
 
-          git push --force https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/USUARIO/mi-web-public.git main
+          git push --force https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/noctua-mas/web.git main
