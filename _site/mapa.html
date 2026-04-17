@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Puntos de muestreo con grabadora - NOCTUA 2024 – Audio-NOCTUA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e31584831b205ffbb2d98406f31c2a5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
+<link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+
+<script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+
+<link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+
+<script src="site_libs/proj4-2.6.2/proj4.min.js"></script>
+
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+
+<link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+
+<script src="site_libs/leaflet-binding-2.2.3/leaflet.js"></script>
+
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Audio-NOCTUA</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./proyecto.html"> 
+<span class="menu-text">El proyecto</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./mapa.html" aria-current="page"> 
+<span class="menu-text">Mapa resumen</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./participar.html"> 
+<span class="menu-text">¿Cómo participar?</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Puntos de muestreo con grabadora - NOCTUA 2024</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="cell-output-display">
+<ul>
+  <li><b>Total de grabadoras:</b> 142</li>
+  <li><b>Número de responsables:</b> 63</li>
+  <li><b>Cuadrículas UTM cubiertas:</b> 70</li>
+  <li><b>Noches grabadas:</b> 96.6 de media 
+  (mínimo: 0, máximo: 169)</li>
+</ul>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-68f67833f70101c3a16e" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-68f67833f70101c3a16e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[[40.538445,40.532756,40.3394462,40.3483101,39.894479,42.51547,42.517841,41.305794,39.840552,42.947151,40.359111,38.958061,37.8946927,40.529525,40.506567,39.775029,39.816521,39.775954,40.813023,40.812844,40.046165,40.044118,40.411225,39.393677,40.460541,39.365747,42.182909,37.111749,37.082971,40.4697449,40.4727628,40.373208,43.2042667,40.434458,40.440281,40.477095,40.483094,38.960714,38.946132,40.4842179,39.6943,39.866033,39.719194,39.653278,41.385978,41.386632,41.41494,40.723083,40.834504,40.838602,40.84008,39.583935,42.202571,42.203931,41.384054,43.1195233,40.838056,37.614093,42.92025972,42.87262,40.7428,42.883052,42.839869,40.737919,40.750402,40.758535,37.599878,41.157194,41.176333,41.140278,41.124233,41.131706,41.099328,39.33213232,39.3284286,39.32682793,39.3371034,40.569498,42.045203,42.570139,42.577167,42.582139,38.038104,38.058985,38.0797,38.090233,38.088933,40.010917,40.01045,40.029523,37.200833,42.5778735,42.585251,42.599441,42.592545,43.423946,43.426245,43.442353,40.4315883,40.4490583,36.598318,41.165972,41.16025,41.16575,39.587635,39.600064,39.600066,40.94799,40.99313,37.9330069,37.8605608,37.9136432,37.8785629,37.9246387,39.324583,42.92754187,43.56258593,42.1513919,36.604417,42.28389,42.29596,42.34821,42.708306,42.690361,42.675417,42.663694,43.42764,38.820737,40.205298,40.207684,40.217457,38.9502,38.944371,38.932373,38.948775,38.939059,42.363901,40.586331,40.914842,41.292136,41.347044,40.508181],[-3.688811,-3.687896,-3.9783446,-3.9558885,-1.329012,-4.81332,-4.856932,-4.62761,-1.290362,-9.211304,-3.505197,-5.188573,-1.22723,-3.789172,-3.745614,-3.698643,-3.653793,-3.607734,-4.544062,-4.56192,-4.826502,-4.800882,-4.07236,-0.524191,-4.112319,-0.5295609999999999,-8.231135999999999,-3.55254,-3.523742,-3.3526651,-3.3410246,-4.025156,-1.5531774,-4.02395,-3.980175,-3.326463,-3.315073,-2.869448,-2.853052,-3.3003512,-0.38519,-4.782697,-0.594333,-0.563694,-3.533864,-3.50929,-3.572707,-3.984139,-3.800105,-3.744554,-3.768299,2.700235,2.848088,2.870592,-4.718993,-2.584072,-3.468889,-1.116645,-2.146689462,-3.295913,-3.85778,-3.320934,-3.270019,-3.896036,-3.902212,-3.927142,-1.127093,-1.337028,-1.343917,-1.381194,-1.451683,-1.42244,-1.427315,-1.302245771,-1.289898815,-1.267571149,-1.321327981,-2.986402,-8.671117000000001,-4.57375,-4.559,-4.528722,-2.292557,-2.297142,-2.279386,-2.268175,-2.242909,-4.894778,-4.954025,-4.959615,-5.843583,-5.4804658,-5.489606,-5.484994,-5.522082,-5.913652,-5.889042,-5.861577,-2.32816,-2.28307,-4.622706,-3.815667,-3.753278,-3.786306,-0.679005,-0.69037,-0.674508,-4.36943,-4.35769,-4.807344,-4.8027008,-4.8207614,-4.7423812,-4.7858893,-1.313528,-8.540280606,-5.773122149,-3.3369637,-4.673222,-3.90291,-3.92283,-3.86835,-3.426778,-3.464917,-3.476139,-3.467194,-4.02078,-0.52593,-5.739811,-5.761061,-5.784321,-1.614953,-1.580296,-1.57089,-1.55088,-1.517998,-4.1489008,-4.258395,-5.795385,1.917385,1.939545,-2.980465],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<b>Monte_Valdelatas_1<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK48<br/><b>Noches:<\/b> 116<br/><b>Hábitat:<\/b> A22","<b>Monte_Valdelatas_2<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK48<br/><b>Noches:<\/b> 116<br/><b>Hábitat:<\/b> A22","<b>Navalcarnero_Noctua2<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK16<br/><b>Noches:<\/b> 65<br/><b>Hábitat:<\/b> A14-02-01","<b>Navalcarnero_Noctua1<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK16<br/><b>Noches:<\/b> 65<br/><b>Hábitat:<\/b> A14-02-01","<b>Landete_Canada del Asno<\/b><br/><b>Provincia:<\/b> Cuenca<br/><b>UTM10:<\/b> XK41<br/><b>Noches:<\/b> 118<br/><b>Hábitat:<\/b> E36","<b>Melojar_de_la_Roza(Villapun)<\/b><br/><b>Provincia:<\/b> Palencia<br/><b>UTM10:<\/b> UN50<br/><b>Noches:<\/b> 50<br/><b>Hábitat:<\/b> A10","<b>Pinar_de_La_Cerra(Villapun)<\/b><br/><b>Provincia:<\/b> Palencia<br/><b>UTM10:<\/b> UN40<br/><b>Noches:<\/b> 50<br/><b>Hábitat:<\/b> A03","<b>Aguasal<\/b><br/><b>Provincia:<\/b> Valladolid<br/><b>UTM10:<\/b> UL67<br/><b>Noches:<\/b> 63<br/><b>Hábitat:<\/b> A0201","<b>Talayuelas _Dehesilla<\/b><br/><b>Provincia:<\/b> Cuenca<br/><b>UTM10:<\/b> XK41<br/><b>Noches:<\/b> 119<br/><b>Hábitat:<\/b> A0301","<b>Estorde<\/b><br/><b>Provincia:<\/b> A Coruña<br/><b>UTM10:<\/b> MH85<br/><b>Noches:<\/b> 118<br/><b>Hábitat:<\/b> F3921","<b>Laguna_Velilla_Cortado<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK56<br/><b>Noches:<\/b> 119<br/><b>Hábitat:<\/b> D300102","<b>Dehesa_de_Siruela<\/b><br/><b>Provincia:<\/b> Badajoz<br/><b>UTM10:<\/b> UJ11<br/><b>Noches:<\/b> 118<br/><b>Hábitat:<\/b> Hábitat arbolado - encinares y alcornocales - típica dehesa - cultivos de secano y explotaciones ganaderas extensivas - poca cobertura de matorral","<b>Majal_Blanco_barranco_blanco_Murcia<\/b><br/><b>Provincia:<\/b> Murcia<br/><b>UTM10:<\/b> XG59<br/><b>Noches:<\/b> 63<br/><b>Hábitat:<\/b> A0202 (Arbolado, pinares abiertos y cobertura de matorral superior al 25%)","<b>Monte_Pardo_Bosque_Ribera<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK38<br/><b>Noches:<\/b> 120<br/><b>Hábitat:<\/b> A230101","<b>Monte_Pardo_Encinas<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK38<br/><b>Noches:<\/b> 120<br/><b>Hábitat:<\/b> A1502","<b>Malpica_Mora_Toledo<\/b><br/><b>Provincia:<\/b> Toledo<br/><b>UTM10:<\/b> VK40<br/><b>Noches:<\/b> 62<br/><b>Hábitat:<\/b> A/03/-/01 (Pinar Isla en zona agrícola) ","<b>Ruinas frente al apeadero de Huerta de Valdecarábanos, Toledo<\/b><br/><b>Provincia:<\/b> Toledo<br/><b>UTM10:<\/b> VK40<br/><b>Noches:<\/b> 62<br/><b>Hábitat:<\/b> E/37/01/01 (ruinas en mosaico agrario) ","<b>Cortijo_de_San_Blas_La_Guardia_Toledo<\/b><br/><b>Provincia:<\/b> Toledo<br/><b>UTM10:<\/b> VK40<br/><b>Noches:<\/b> 61<br/><b>Hábitat:<\/b> E/31/-/- (rodal de pinos junto a ruinas, en zona agrícola) ","<b>Maello_1<\/b><br/><b>Provincia:<\/b> Ávila<br/><b>UTM10:<\/b> UL61<br/><b>Noches:<\/b> 120<br/><b>Hábitat:<\/b> A1501","<b>Maello_2<\/b><br/><b>Provincia:<\/b> Ávila<br/><b>UTM10:<\/b> UL61<br/><b>Noches:<\/b> 120<br/><b>Hábitat:<\/b> A140201","<b>DEPOSITO_AGUA_DE_CERVERA_DE_LOS_MONTES<\/b><br/><b>Provincia:<\/b> Toledo<br/><b>UTM10:<\/b> UK73<br/><b>Noches:<\/b> 64<br/><b>Hábitat:<\/b> A214","<b>PARAJE \"CERRO DEL CURA\", CERVERA DE LOS MONTES<\/b><br/><b>Provincia:<\/b> Toledo<br/><b>UTM10:<\/b> UK73<br/><b>Noches:<\/b> 64<br/><b>Hábitat:<\/b> A214","<b>La Cepilla<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK07<br/><b>Noches:<\/b> 65<br/><b>Hábitat:<\/b> A-14-01-01.","<b>Torrente_Morredondo<\/b><br/><b>Provincia:<\/b> Valencia<br/><b>UTM10:<\/b> YJ16<br/><b>Noches:<\/b> 119<br/><b>Hábitat:<\/b> E36","<b>Navalagamella<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK07<br/><b>Noches:<\/b> 64<br/><b>Hábitat:<\/b> A-14-02-02","<b>Picassent _Ninerola<\/b><br/><b>Provincia:<\/b> Valencia<br/><b>UTM10:<\/b> YJ16<br/><b>Noches:<\/b> 119<br/><b>Hábitat:<\/b> A0202","<b>Noceifas<\/b><br/><b>Provincia:<\/b> Pontevedra<br/><b>UTM10:<\/b> NG67<br/><b>Noches:<\/b> 117<br/><b>Hábitat:<\/b> A11 01 01","<b>Monachil_E2<\/b><br/><b>Provincia:<\/b> Granada<br/><b>UTM10:<\/b> VG50<br/><b>Noches:<\/b> 122<br/><b>Hábitat:<\/b> E3701","<b>Monachil_E5<\/b><br/><b>Provincia:<\/b> Granada<br/><b>UTM10:<\/b> VG50<br/><b>Noches:<\/b> 122<br/><b>Hábitat:<\/b> B25","<b>Cerros Alcalá Noctua 5<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK78<br/><b>Noches:<\/b> 123<br/><b>Hábitat:<\/b> A 02 3 01","<b>Cerros Alcalá Noctua 4<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK78<br/><b>Noches:<\/b> 123<br/><b>Hábitat:<\/b> A03301","<b>SevillaLaNueva_Carril_Carboneros<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK16<br/><b>Noches:<\/b> 55<br/><b>Hábitat:<\/b> A1502","<b>Noctua 3 Zuhaitz berezia <\/b><br/><b>Provincia:<\/b> Navarra<br/><b>UTM10:<\/b> XN18<br/><b>Noches:<\/b> 46<br/><b>Hábitat:<\/b> A1602","<b>Compostadora Villanueva de la Canada<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK17<br/><b>Noches:<\/b> 65<br/><b>Hábitat:<\/b> E31","<b>VC Camino de la casa de la Vilanosa<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK17<br/><b>Noches:<\/b> 63<br/><b>Hábitat:<\/b> A140101","<b>Cerros Alcalá Noctua 3<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK78<br/><b>Noches:<\/b> 123<br/><b>Hábitat:<\/b> A03303","<b>Cerros Alcalá Noctua 2<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK78<br/><b>Noches:<\/b> 123<br/><b>Hábitat:<\/b> A02302","<b>RUIDERA_PARKING_ISLA<\/b><br/><b>Provincia:<\/b> Albacete<br/><b>UTM10:<\/b> WJ11<br/><b>Noches:<\/b> 121<br/><b>Hábitat:<\/b> D 30 01 02","<b>LAGUNA LENGUA<\/b><br/><b>Provincia:<\/b> Albacete<br/><b>UTM10:<\/b> WJ11<br/><b>Noches:<\/b> 121<br/><b>Hábitat:<\/b> D 30 01 02","<b>Cerros Alcalá Noctua 1<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VK78<br/><b>Noches:<\/b> 123<br/><b>Hábitat:<\/b> B26","<b>P. Natural Serra Calderona: Garbí.<\/b><br/><b>Provincia:<\/b> Valencia<br/><b>UTM10:<\/b> YJ29<br/><b>Noches:<\/b> 63<br/><b>Hábitat:<\/b> A 02 02","<b>Finca La Aceitunilla, término de La Pueblanueva (Toledo)<\/b><br/><b>Provincia:<\/b> Toledo<br/><b>UTM10:<\/b> UK41<br/><b>Noches:<\/b> 60<br/><b>Hábitat:<\/b> E34 olivar","<b>MAS DE MOIA<\/b><br/><b>Provincia:<\/b> Valencia<br/><b>UTM10:<\/b> YJ09<br/><b>Noches:<\/b> 63<br/><b>Hábitat:<\/b> E36","<b>Maimona <\/b><br/><b>Provincia:<\/b> Valencia<br/><b>UTM10:<\/b> YJ09<br/><b>Noches:<\/b> 63<br/><b>Hábitat:<\/b> E36","<b>Castiltierra_lavadero<\/b><br/><b>Provincia:<\/b> Segovia<br/><b>UTM10:<\/b> VL58<br/><b>Noches:<\/b> 63<br/><b>Hábitat:<\/b> F390101","<b>Alto Cascajares<\/b><br/><b>Provincia:<\/b> Segovia<br/><b>UTM10:<\/b> VL58<br/><b>Noches:<\/b> 61<br/><b>Hábitat:<\/b> E31","<b>Bercimuel <\/b><br/><b>Provincia:<\/b> Segovia<br/><b>UTM10:<\/b> VL58<br/><b>Noches:<\/b> 114<br/><b>Hábitat:<\/b> E31","<b>Moralzarzal_Gabarrera<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VL10<br/><b>Noches:<\/b> 123<br/><b>Hábitat:<\/b> Arbolado - Mezcla pinares, abetales y enebros - matorral >25%","<b>Morcuera<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VL32<br/><b>Noches:<\/b> 101<br/><b>Hábitat:<\/b> A1102","<b>Valle_Bustarviejo<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VL32<br/><b>Noches:<\/b> 126<br/><b>Hábitat:<\/b> E370101","<b>Ctra_Canencia<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VL32<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> A1102","<b>Finca El Colomer (Mallorca)<\/b><br/><b>Provincia:<\/b> Baleares<br/><b>UTM10:<\/b> DD78<br/><b>Noches:<\/b> 123<br/><b>Hábitat:<\/b> E34 olivar ecológico","<b>Navata_punt 2<\/b><br/><b>Provincia:<\/b> Girona<br/><b>UTM10:<\/b> DG87<br/><b>Noches:<\/b> 63<br/><b>Hábitat:<\/b> A18-02","<b>Navata_3<\/b><br/><b>Provincia:<\/b> Girona<br/><b>UTM10:<\/b> DG87<br/><b>Noches:<\/b> 113<br/><b>Hábitat:<\/b> A15-01","<b>Hornillos_pinar<\/b><br/><b>Provincia:<\/b> Valladolid<br/><b>UTM10:<\/b> UL58<br/><b>Noches:<\/b> 59<br/><b>Hábitat:<\/b> A0201","<b>Marzana_Atxondo<\/b><br/><b>Provincia:<\/b> Vizcaya<br/><b>UTM10:<\/b> WN37<br/><b>Noches:<\/b> 14<br/><b>Hábitat:<\/b> E540202","<b>Uceda_Tanatorio_P2<\/b><br/><b>Provincia:<\/b> Guadalajara<br/><b>UTM10:<\/b> VL62<br/><b>Noches:<\/b> 128<br/><b>Hábitat:<\/b> F 41 0102","<b>Cartagena Rambla Jarales Depósito Oxidado<\/b><br/><b>Provincia:<\/b> Murcia<br/><b>UTM10:<\/b> XG66<br/><b>Noches:<\/b> 56<br/><b>Hábitat:<\/b> E370102","<b>Alsasua_Sarabe<\/b><br/><b>Provincia:<\/b> Navarra<br/><b>UTM10:<\/b> WN65<br/><b>Noches:<\/b> 103<br/><b>Hábitat:<\/b> C27","<b>Quintanilla_M<\/b><br/><b>Provincia:<\/b> Burgos<br/><b>UTM10:<\/b> VN74<br/><b>Noches:<\/b> 126<br/><b>Hábitat:<\/b> E 54 01 01","<b>Manzanares_rodaje<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VL21<br/><b>Noches:<\/b> 126<br/><b>Hábitat:<\/b> B26","<b>Quintana_Entre<\/b><br/><b>Provincia:<\/b> Burgos<br/><b>UTM10:<\/b> VN74<br/><b>Noches:<\/b> 126<br/><b>Hábitat:<\/b> A 18 - 01","<b>LaPrada<\/b><br/><b>Provincia:<\/b> Burgos<br/><b>UTM10:<\/b> VN74<br/><b>Noches:<\/b> 126<br/><b>Hábitat:<\/b> E 54 01 01","<b>Manzanares_Quebrantaherraduras<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VL21<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> A03","<b>Manzanares_Cantocochino<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VL21<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> A3","<b>Manzanares_fuente retén<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> VL21<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> A3","<b>Cartagena, Subida Cabezo Negro la Muela<\/b><br/><b>Provincia:<\/b> Murcia<br/><b>UTM10:<\/b> XG66<br/><b>Noches:<\/b> 64<br/><b>Hábitat:<\/b> E370102","<b>CV-647 Villarroya_Punto 1<\/b><br/><b>Provincia:<\/b> Zaragoza<br/><b>UTM10:<\/b> XL35<br/><b>Noches:<\/b> 64<br/><b>Hábitat:<\/b> Mosaicos agropecuarios mediterráneos","<b>N-330 Mainar_Punto 2<\/b><br/><b>Provincia:<\/b> Zaragoza<br/><b>UTM10:<\/b> XL35<br/><b>Noches:<\/b> 63<br/><b>Hábitat:<\/b> Mosaicos agropecuarios mediterráneos","<b>Retascón_Punto 5<\/b><br/><b>Provincia:<\/b> Zaragoza<br/><b>UTM10:<\/b> XL35<br/><b>Noches:<\/b> 60<br/><b>Hábitat:<\/b> Mosaicos agropecuarios mediterráneos","<b>DarocaJiloca_3<\/b><br/><b>Provincia:<\/b> Zaragoza<br/><b>UTM10:<\/b> XL35<br/><b>Noches:<\/b> 65<br/><b>Hábitat:<\/b> E 37 01 02","<b>DarocaPinar_1<\/b><br/><b>Provincia:<\/b> Zaragoza<br/><b>UTM10:<\/b> XL35<br/><b>Noches:<\/b> 62<br/><b>Hábitat:<\/b> A 03 01","<b>DarocaJiloca_05<\/b><br/><b>Provincia:<\/b> Zaragoza<br/><b>UTM10:<\/b> XL35<br/><b>Noches:<\/b> 65<br/><b>Hábitat:<\/b> E 37 01 02","<b>Cilanco 3<\/b><br/><b>Provincia:<\/b> Albacete<br/><b>UTM10:<\/b> XJ45<br/><b>Noches:<\/b> 124<br/><b>Hábitat:<\/b> 18.Mezclas abiertas de planifolias y coníferas","<b>Cilanco 2<\/b><br/><b>Provincia:<\/b> Albacete<br/><b>UTM10:<\/b> XJ45 <br/><b>Noches:<\/b> 0<br/><b>Hábitat:<\/b> 02.Pinares y abetales abiertos","<b>Cilanco 1<\/b><br/><b>Provincia:<\/b> Albacete<br/><b>UTM10:<\/b> XJ45 <br/><b>Noches:<\/b> 0<br/><b>Hábitat:<\/b> 23.Riberas fluviales arboladas","<b>Cilanco 4<\/b><br/><b>Provincia:<\/b> Albacete<br/><b>UTM10:<\/b> XJ45 <br/><b>Noches:<\/b> 124<br/><b>Hábitat:<\/b> 02.Pinares y abetales abiertos","<b>Romanones_pueblo<\/b><br/><b>Provincia:<\/b> Guadalajara<br/><b>UTM10:<\/b> WK09<br/><b>Noches:<\/b> 133<br/><b>Hábitat:<\/b> Humanizado pueblo poca, zona pinar en kas afueras del pueblo de menos de 150 hab","<b>Tui_2<\/b><br/><b>Provincia:<\/b> Pontevedra<br/><b>UTM10:<\/b> NG25<br/><b>Noches:<\/b> 132<br/><b>Hábitat:<\/b> E540101","<b>Barracon<\/b><br/><b>Provincia:<\/b> Palencia<br/><b>UTM10:<\/b> UN71<br/><b>Noches:<\/b> 65<br/><b>Hábitat:<\/b> e37 a02","<b>Corrales de Merino<\/b><br/><b>Provincia:<\/b> Palencia<br/><b>UTM10:<\/b> UN71<br/><b>Noches:<\/b> 64<br/><b>Hábitat:<\/b> a02","<b>Tremedo<\/b><br/><b>Provincia:<\/b> Palencia<br/><b>UTM10:<\/b> UN71<br/><b>Noches:<\/b> 65<br/><b>Hábitat:<\/b> E37 A02","<b>WH61-1 (Cortijo de la Canada)<\/b><br/><b>Provincia:<\/b> Murcia<br/><b>UTM10:<\/b> WH61<br/><b>Noches:<\/b> 50<br/><b>Hábitat:<\/b> E.AGRÍCOLAS, 31.Cultivos de secano, ","<b>WH61-2 Subida a Casa Ayala<\/b><br/><b>Provincia:<\/b> Murcia<br/><b>UTM10:<\/b> WH61<br/><b>Noches:<\/b> 50<br/><b>Hábitat:<\/b> A.ARBOLADOS, 19.Mezclas densas de planifolias y coníferas,","<b>WH61-3 Inmediaciones de Puerto Alto<\/b><br/><b>Provincia:<\/b> Murcia<br/><b>UTM10:<\/b> WH61<br/><b>Noches:<\/b> 48<br/><b>Hábitat:<\/b> E.AGRÍCOLAS, 37.Mosaicos agropecuarios mediterráneos, 02.Arbolado +40%, 02.Matorral +25%","<b>WH61-4 Bajada a Puerto Hondo<\/b><br/><b>Provincia:<\/b> Murcia<br/><b>UTM10:<\/b> WH61<br/><b>Noches:<\/b> 41<br/><b>Hábitat:<\/b> E.AGRÍCOLAS, 37.Mosaicos agropecuarios mediterráneos, 01.Arbolado 5-40%, 01.Matorral 0-25%","<b>WH61-5 Barranco de Javanas, cabecera<\/b><br/><b>Provincia:<\/b> Murcia<br/><b>UTM10:<\/b> WH61<br/><b>Noches:<\/b> 50<br/><b>Hábitat:<\/b> A.ARBOLADOS, 03.Pinares y Abetales densos, 02.Matorral +25%","<b>Mejorada-Velada estación 1<\/b><br/><b>Provincia:<\/b> Toledo<br/><b>UTM10:<\/b> UK33<br/><b>Noches:<\/b> 45<br/><b>Hábitat:<\/b> Encinar adehesado con ganadería y huertos. Afueras de la población de Mejorada (Toledo)","<b>Mejorada-Velada estación 4<\/b><br/><b>Provincia:<\/b> Toledo<br/><b>UTM10:<\/b> UK33<br/><b>Noches:<\/b> 128<br/><b>Hábitat:<\/b> Alcornocal de repoblación y cultivos de secano.","<b>Mejorada-Velada estación 5<\/b><br/><b>Provincia:<\/b> Toledo<br/><b>UTM10:<\/b> UK33<br/><b>Noches:<\/b> 59<br/><b>Hábitat:<\/b> Bosque de ribera y cultivo de secano.","<b>Sevilla_noctua5<\/b><br/><b>Provincia:<\/b> Sevilla<br/><b>UTM10:<\/b> TG42<br/><b>Noches:<\/b> 0<br/><b>Hábitat:<\/b> A pinares","<b>Pinar_1<\/b><br/><b>Provincia:<\/b> León<br/><b>UTM10:<\/b> TN91<br/><b>Noches:<\/b> 118<br/><b>Hábitat:<\/b> A03","<b>Chopos_2<\/b><br/><b>Provincia:<\/b> León<br/><b>UTM10:<\/b> TN91<br/><b>Noches:<\/b> 118<br/><b>Hábitat:<\/b> A2301","<b>Vertedero ilegal_3<\/b><br/><b>Provincia:<\/b> León<br/><b>UTM10:<\/b> TN91<br/><b>Noches:<\/b> 118<br/><b>Hábitat:<\/b> B25","<b>Pinar_4<\/b><br/><b>Provincia:<\/b> León<br/><b>UTM10:<\/b> TN91<br/><b>Noches:<\/b> 118<br/><b>Hábitat:<\/b> A01","<b>Llanera_Castiello<\/b><br/><b>Provincia:<\/b> Asturias<br/><b>UTM10:<\/b> TP61<br/><b>Noches:<\/b> 132<br/><b>Hábitat:<\/b> A2002","<b>Llanera_San Cucao<\/b><br/><b>Provincia:<\/b> Asturias<br/><b>UTM10:<\/b> TP61<br/><b>Noches:<\/b> 132<br/><b>Hábitat:<\/b> A0601","<b>Llanera_Severies<\/b><br/><b>Provincia:<\/b> Asturias<br/><b>UTM10:<\/b> TP61 <br/><b>Noches:<\/b> 132<br/><b>Hábitat:<\/b> C28","<b>Priego cortado río Tabaque.<\/b><br/><b>Provincia:<\/b> Cuenca<br/><b>UTM10:<\/b> WK57<br/><b>Noches:<\/b> 135<br/><b>Hábitat:<\/b> E.Agricplas 37","<b>Priego Convento San Miguel <\/b><br/><b>Provincia:<\/b> Cuenca<br/><b>UTM10:<\/b> WK57<br/><b>Noches:<\/b> 136<br/><b>Hábitat:<\/b> En una ladera de la hoz del estrecho de Priego. Mayor mente pinar. ","<b>Osunillas-San Antón<\/b><br/><b>Provincia:<\/b> Málaga<br/><b>UTM10:<\/b> UF55<br/><b>Noches:<\/b> 125<br/><b>Hábitat:<\/b> B25","<b>Orejana-Tejadilla<\/b><br/><b>Provincia:<\/b> Segovia<br/><b>UTM10:<\/b> VL35<br/><b>Noches:<\/b> 60<br/><b>Hábitat:<\/b> A17","<b>Orejana-La Muneca<\/b><br/><b>Provincia:<\/b> Segovia<br/><b>UTM10:<\/b> VL35<br/><b>Noches:<\/b> 60<br/><b>Hábitat:<\/b> A01","<b>Orejana-Arenal<\/b><br/><b>Provincia:<\/b> Segovia<br/><b>UTM10:<\/b> VL35<br/><b>Noches:<\/b> 60<br/><b>Hábitat:<\/b> E370101","<b>Noctua_3<\/b><br/><b>Provincia:<\/b> Valencia<br/><b>UTM10:<\/b> XJ98<br/><b>Noches:<\/b> 63<br/><b>Hábitat:<\/b> E3702","<b>Noctua_4<\/b><br/><b>Provincia:<\/b> Valencia<br/><b>UTM10:<\/b> XJ98<br/><b>Noches:<\/b> 65<br/><b>Hábitat:<\/b> E370102","<b>Noctua_5<\/b><br/><b>Provincia:<\/b> Valencia<br/><b>UTM10:<\/b> XJ98<br/><b>Noches:<\/b> 63<br/><b>Hábitat:<\/b> E370102","<b>Pinar abierto<\/b><br/><b>Provincia:<\/b> Segovia<br/><b>UTM10:<\/b> UL83<br/><b>Noches:<\/b> 65<br/><b>Hábitat:<\/b> A31","<b>Taray en entorno estepario<\/b><br/><b>Provincia:<\/b> Segovia<br/><b>UTM10:<\/b> UL83<br/><b>Noches:<\/b> 65<br/><b>Hábitat:<\/b> E31","<b>Morales_066<\/b><br/><b>Provincia:<\/b> Córdoba<br/><b>UTM10:<\/b> UG49<br/><b>Noches:<\/b> 117<br/><b>Hábitat:<\/b> A14, 02, 02","<b>Ifapa_069<\/b><br/><b>Provincia:<\/b> Córdoba<br/><b>UTM10:<\/b> UG49<br/><b>Noches:<\/b> 117<br/><b>Hábitat:<\/b> E50","<b>Reventon_073<\/b><br/><b>Provincia:<\/b> Córdoba<br/><b>UTM10:<\/b> UG49<br/><b>Noches:<\/b> 117<br/><b>Hábitat:<\/b> E34","<b>Rivera_075<\/b><br/><b>Provincia:<\/b> Córdoba<br/><b>UTM10:<\/b> UG49<br/><b>Noches:<\/b> 117<br/><b>Hábitat:<\/b> D29, 02, 01","<b>Naranjo_062<\/b><br/><b>Provincia:<\/b> Córdoba<br/><b>UTM10:<\/b> UG49<br/><b>Noches:<\/b> 117<br/><b>Hábitat:<\/b> E34","<b>Cilanco 5<\/b><br/><b>Provincia:<\/b> Albacete<br/><b>UTM10:<\/b> XJ45 <br/><b>Noches:<\/b> 124<br/><b>Hábitat:<\/b> Pinar junto a cultivos de secano (E370202)","<b>Estación nº 3 de Nonctua en Santiago de Compostela<\/b><br/><b>Provincia:<\/b> Pontevedra<br/><b>UTM10:<\/b> NH35<br/><b>Noches:<\/b> 131<br/><b>Hábitat:<\/b> A.19.02","<b>Yavio - Carreno<\/b><br/><b>Provincia:<\/b> Asturias<br/><b>UTM10:<\/b> TP72<br/><b>Noches:<\/b> 139<br/><b>Hábitat:<\/b> E.AGRÍCOLAS, 54.Mosaicos agropecuarios del norte, 02.Arbolado +40%, 01.Matorral 0-25%","<b>Iglesiapinta_tenada<\/b><br/><b>Provincia:<\/b> Burgos<br/><b>UTM10:<\/b> VM76<br/><b>Noches:<\/b> 105<br/><b>Hábitat:<\/b> C24","<b>Sierra Mijas<\/b><br/><b>Provincia:<\/b> Málaga<br/><b>UTM10:<\/b> UF55<br/><b>Noches:<\/b> 141<br/><b>Hábitat:<\/b> A1, A22 , A32, A42, ","<b>Monte_Estepar<\/b><br/><b>Provincia:<\/b> Burgos<br/><b>UTM10:<\/b> VM28<br/><b>Noches:<\/b> 137<br/><b>Hábitat:<\/b> A11","<b>Pinar_Vilviestre<\/b><br/><b>Provincia:<\/b> Burgos<br/><b>UTM10:<\/b> VM28<br/><b>Noches:<\/b> 137<br/><b>Hábitat:<\/b> A03","<b>Monte_Rabe<\/b><br/><b>Provincia:<\/b> Burgos<br/><b>UTM10:<\/b> VM28<br/><b>Noches:<\/b> 144<br/><b>Hábitat:<\/b> A11","<b>Pino  de Bureba<\/b><br/><b>Provincia:<\/b> Burgos<br/><b>UTM10:<\/b> VN62<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> 37,01,02","<b>Salas de Bureba<\/b><br/><b>Provincia:<\/b> Burgos<br/><b>UTM10:<\/b> VN62<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> 23,01,01","<b>Estación <\/b><br/><b>Provincia:<\/b> Burgos<br/><b>UTM10:<\/b> VN62<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> 37,01,01","<b>Abogadillo<\/b><br/><b>Provincia:<\/b> Burgos<br/><b>UTM10:<\/b> VN62<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> 37,01,02","<b>Cantera de Cuchía (Miengo, Cantabria)<\/b><br/><b>Provincia:<\/b> Cantabria<br/><b>UTM10:<\/b> VP10<br/><b>Noches:<\/b> 153<br/><b>Hábitat:<\/b> A140202","<b>Estación_1<\/b><br/><b>Provincia:<\/b> Valencia<br/><b>UTM10:<\/b> YJ10<br/><b>Noches:<\/b> 51<br/><b>Hábitat:<\/b> A0302","<b>Collado Las Losas<\/b><br/><b>Provincia:<\/b> Cáceres<br/><b>UTM10:<\/b> TK65<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> A10-0.2","<b>Fuente de la Pedrera<\/b><br/><b>Provincia:<\/b> Cáceres<br/><b>UTM10:<\/b> TK65<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> A11","<b>Vertedero<\/b><br/><b>Provincia:<\/b> Cáceres<br/><b>UTM10:<\/b> TK65<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> A11","<b>Noctua XJ21. IP_016<\/b><br/><b>Provincia:<\/b> Albacete<br/><b>UTM10:<\/b> XJ21<br/><b>Noches:<\/b> 132<br/><b>Hábitat:<\/b> A31","<b>Noctua XJ21 IP_005<\/b><br/><b>Provincia:<\/b> Albacete<br/><b>UTM10:<\/b> XJ21<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> E3712","<b>Noctua XJ21 IP_006<\/b><br/><b>Provincia:<\/b> Albacete<br/><b>UTM10:<\/b> XJ21<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> E3711","<b>Noctua XJ21 IP_008<\/b><br/><b>Provincia:<\/b> Albacete<br/><b>UTM10:<\/b> XJ21<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> E3711","<b>Noctua XJ21 IP_019<\/b><br/><b>Provincia:<\/b> Albacete<br/><b>UTM10:<\/b> XJ21<br/><b>Noches:<\/b> 127<br/><b>Hábitat:<\/b> E3711","<b>Villasandino<\/b><br/><b>Provincia:<\/b> Burgos<br/><b>UTM10:<\/b> VM09<br/><b>Noches:<\/b> 117<br/><b>Hábitat:<\/b> 31","<b>Santa María de la Alameda<\/b><br/><b>Provincia:<\/b> Madrid<br/><b>UTM10:<\/b> UK99<br/><b>Noches:<\/b> 91<br/><b>Hábitat:<\/b> 18 01","<b>Galindo y Perahuy_Monte de la Rad<\/b><br/><b>Provincia:<\/b> Salamanca<br/><b>UTM10:<\/b> TL63<br/><b>Noches:<\/b> 24<br/><b>Hábitat:<\/b> A14 02 01","<b>Abocador del Garraf - La Morella<\/b><br/><b>Provincia:<\/b> Barcelona<br/><b>UTM10:<\/b> DF07<br/><b>Noches:<\/b> 128<br/><b>Hábitat:<\/b> F43","<b>Penya del Moro<\/b><br/><b>Provincia:<\/b> Barcelona<br/><b>UTM10:<\/b> DF17<br/><b>Noches:<\/b> 128<br/><b>Hábitat:<\/b> A32","<b><\/b><br/><b>Provincia:<\/b> Guadalajara<br/><b>UTM10:<\/b> WK08<br/><b>Noches:<\/b> 169<br/><b>Hábitat:<\/b> A17/-/02"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"setView":[[40.4,-3.7],5,[]],"limits":{"lat":[36.598318,43.56258593],"lng":[-9.211304,2.870592]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,384 @@
+---
+title: "Resultados - NOCTUA+"
+lang: es
+---
+
+## Resumen 2025
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(leaflet)
+library(glue)
+library(htmltools)
+library(sf)
+library(dplyr)
+library(stringr)
+```
+
+```{r setup, echo=FALSE}
+ptos <- read.csv("datos/noctua_habitats.csv", sep = ",", header = T)
+ptos <- ptos %>%
+  mutate(PuntoMuestreo = gsub("_", " ", PuntoMuestreo))
+    # FechaInicioGrabacionMuestreo = as.Date(FechaInicioGrabacionMuestreo),
+    # FechaInicioGrabacionMuestreo = format(FechaInicioGrabacionMuestreo, "%d/%m/%Y"),
+    # FechaFinGrabacionMuestreo = as.Date(FechaFinGrabacionMuestreo),
+    #FechaFinGrabacionMuestreo = format(FechaFinGrabacionMuestreo, "%d/%m/%Y"))
+```
+
+```{r resumen, echo=FALSE}
+resumen_html <- glue(
+  "<ul>
+    <li><b>Total de grabadoras:</b> {length(unique(ptos$Grabadora.ID))}</li>
+    <li><b>Número de responsables:</b> {length(unique(ptos$Responsable))}</li>
+    <li><b>Cuadrículas UTM cubiertas:</b> {length(unique(ptos$UTM10_Asignada))}</li>
+    <li><b>Noches grabadas:</b> {round(mean(ptos$Dias_Grabados_Campo),1)} de media 
+    (mínimo: {min(ptos$Dias_Grabados_Campo)}, máximo: {max(ptos$Dias_Grabados_Campo)})</li>
+  </ul>"
+)
+
+HTML(resumen_html)
+```
+
+## Mapa - ¿Dónde se han instalado las grabadoras?
+
+Haz clic en cada cuadrícula para ver la información sobre los puntos de muestreo ubicados en esa cuadrícula.
+
+```{r crear_mapa, echo=FALSE, message=FALSE, results=FALSE, warning=FALSE}
+
+ptos_25 <- ptos
+ptos_sf_25 <- st_as_sf(ptos_25, coords = c("Longitud", "Latitud"), crs = 4326)
+
+# Cargar cuadrículas
+UTM <- st_read("datos/Malla10x10_Ter_p.shp") %>%
+  st_transform(crs = 4326)
+
+# Unión espacial: asignar cada punto a la cuadrícula donde cae
+ptos_con_UTM_25 <- st_join(ptos_sf_25, UTM, join = st_within)
+
+# Crear HTML de popup transpuesto
+popup_html_25 <- ptos_con_UTM_25 %>%
+  st_set_geometry(NULL) %>%
+  group_by(UTMCODE) %>%
+  summarise(
+    popup = {
+      # Datos de cada punto
+      # puntos <- rep("Punto", dplyr::n())
+      puntos    <- PuntoMuestreo
+      # provincia <- Provincia
+      especies  <- rep("(aún no disponible)", dplyr::n())
+      inicio    <- FechaInicioGrabacionMuestreo
+      fin       <- FechaFinGrabacionMuestreo
+      noches    <- Dias_Grabados_Campo
+      habitat   <- Habitat
+      grabadora <- Grabadora.ID
+      
+      # Columnas con ancho mínimo
+      columnas <- paste0("<th style='padding:4px 12px; min-width:100px;'>", puntos, "</th>", collapse = "")
+      # fila_provincia    <- paste0("<td style='padding:4px 12px; min-width:100px;'>", provincia, "</td>", collapse = "")
+      fila_especies  <-paste0("<td style='padding:4px 12px; min-width:100px;'>", especies, "</td>", collapse = "")
+      fila_inicio    <- paste0("<td style='padding:4px 12px; min-width:100px;'>", inicio, "</td>", collapse = "")
+      fila_fin       <- paste0("<td style='padding:4px 12px; min-width:100px;'>", fin, "</td>", collapse = "")
+      fila_noches    <- paste0("<td style='padding:4px 12px; min-width:100px;'>", noches, "</td>", collapse = "")
+      fila_habitat   <- paste0("<td style='padding:4px 12px; min-width:100px;'>", habitat, "</td>", collapse = "")
+      fila_grabadora <- paste0("<td style='padding:4px 12px; min-width:100px;'>", grabadora, "</td>", collapse = "")
+      
+      # Tabla envuelta en un div con scroll horizontal
+      paste0(
+        "<div style='overflow-x:auto; max-width:400px;'>",  # <- aquí ajusta el max-width del popup
+        "<table style='border-collapse: collapse; width: 100%; border: 1px solid #ccc;'>",
+        "<tr style='background-color:#f0f0f0;'><th style='padding:4px 12px;'></th>", columnas, "</tr>",
+        "<tr><th style='padding:4px 12px;'>Especies</th>", fila_especies, "</tr>",
+        "<tr><th style='padding:4px 12px;'>Hábitat</th>", fila_habitat, "</tr>",
+        "<tr><th style='padding:4px 12px;'>Inicio</th>", fila_inicio, "</tr>",
+        "<tr><th style='padding:4px 12px;'>Fin</th>", fila_fin, "</tr>",
+        "<tr><th style='padding:4px 12px;'>Nº noches</th>", fila_noches, "</tr>",
+        "<tr><th style='padding:4px 12px;'>ID grabadora</th>", fila_grabadora, "</tr>",
+        "</table>",
+        "</div>"
+      )
+    },
+    .groups = "drop"
+  )
+
+# Unir info de popup a polígonos
+cuad_con_info_25 <- UTM %>%
+  inner_join(popup_html_25, by = "UTMCODE")
+
+#-----lo mismo para 2024:
+ptos_24 <- read.csv("datos/noctua-24.csv", sep = ";", header = T)
+ptos_24 <- ptos_24 %>%
+  filter(!is.na(Longitud), !is.na(Latitud))
+ptos_sf_24 <- st_as_sf(ptos_24, coords = c("Longitud", "Latitud"), crs = 4326)
+
+# Cargar cuadrículas
+UTM <- st_read("datos/Malla10x10_Ter_p.shp") %>%
+  st_transform(crs = 4326)
+
+# Unión espacial: asignar cada punto a la cuadrícula donde cae
+ptos_con_UTM_24 <- st_join(ptos_sf_24, UTM, join = st_within)
+
+# Crear HTML de popup transpuesto
+popup_html_24 <- ptos_con_UTM_24 %>%
+  st_set_geometry(NULL) %>%
+  group_by(UTMCODE) %>%
+  summarise(
+    popup = {
+      # Datos de cada punto
+      especies  <- rep("(aún no disponible)", dplyr::n())
+      inicio    <- str_extract(Fecha.inicio, "^[^,]+")
+      fin       <- str_extract(Fecha.fin, "^[^,]+")
+
+      # Columnas con ancho mínimo
+      columnas <- paste0("<th style='padding:4px 12px; min-width:100px;'>", "", "</th>", collapse = "")
+      # fila_provincia    <- paste0("<td style='padding:4px 12px; min-width:100px;'>", provincia, "</td>", collapse = "")
+      fila_especies  <-paste0("<td style='padding:4px 12px; min-width:100px;'>", especies, "</td>", collapse = "")
+      fila_inicio    <- paste0("<td style='padding:4px 12px; min-width:100px;'>", inicio, "</td>", collapse = "")
+      fila_fin       <- paste0("<td style='padding:4px 12px; min-width:100px;'>", fin, "</td>", collapse = "")
+ 
+      # Tabla envuelta en un div con scroll horizontal
+      paste0(
+        "<div style='overflow-x:auto; max-width:400px;'>",  # <- aquí ajusta el max-width del popup
+        "<table style='border-collapse: collapse; width: 100%; border: 1px solid #ccc;'>",
+        "<tr style='background-color:#f0f0f0;'><th style='padding:4px 12px;'></th>", columnas, "</tr>",
+        "<tr><th style='padding:4px 12px;'>Especies</th>", fila_especies, "</tr>",
+        "<tr><th style='padding:4px 12px;'>Inicio</th>", fila_inicio, "</tr>",
+        "<tr><th style='padding:4px 12px;'>Fin</th>", fila_fin, "</tr>",
+        "</table>",
+        "</div>"
+      )
+    },
+    .groups = "drop"
+  )
+
+# Unir info de popup a polígonos
+cuad_con_info_24 <- UTM %>%
+  inner_join(popup_html_24, by = "UTMCODE")
+```
+
+```{r mostrar_mapa, echo= FALSE}
+# Crear mapa Leaflet
+leaflet() %>%
+  addTiles() %>%
+  setView(lng = -3.7, lat = 40.4, zoom = 5) %>%
+  addPolygons(
+    data = cuad_con_info_25,
+    fillOpacity = 0.2,
+    color = "blue",
+    weight = 1,
+    popup = ~popup,
+    highlightOptions = highlightOptions(
+      weight = 3,
+      color = "blue",
+      bringToFront = TRUE),
+    group = "Noctua+ 2025") %>%
+  addPolygons(
+    data = cuad_con_info_24,
+    fillOpacity = 0.2,
+    color = "red",
+    weight = 1,
+    popup = ~popup,
+    highlightOptions = highlightOptions(
+      weight = 3,
+      color = "red",
+      bringToFront = TRUE),
+    group = "Noctua+ 2024") %>%
+  addLayersControl(
+    overlayGroups = c("Noctua+ 2025", "Noctua+ 2024"),
+    options = layersControlOptions(collapsed = FALSE)
+  ) %>%
+  hideGroup("Noctua+ 2024") %>%
+  addControl(
+    html = "
+    <div style='background:white; padding:10px; border-radius:5px;'>
+      <b>Temporadas</b><br>
+      
+      <div style='display:flex;align-items:center;margin-top:5px;'>
+        <span style='background:rgba(0,0,255,0.2);
+                     border:2px solid blue;
+                     width:18px; height:18px;
+                     display:inline-block;
+                     margin-right:5px;'></span>
+        2025
+      </div>
+      
+      <div style='display:flex;align-items:center;margin-top:5px;'>
+        <span style='background:rgba(255,0,0,0.2);
+                     border:2px solid red;
+                     width:18px; height:18px;
+                     display:inline-block;
+                     margin-right:5px;'></span>
+        2024
+      </div>
+    </div>
+    ",
+    position = "topleft"
+  )
+```
+
+## Hábitats
+
+```{r graf_habitats, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE, out.width = "100%", fig.show='hide'}
+# gráfico hábitats
+
+library(forcats)
+library(stringr)
+library(ggimage)
+library(ggtext)
+library(ggplot2)
+library(gapminder)
+
+#nuevos datos solo con las columnas que me interesan
+habitats_conteo <- ptos %>%
+  select(HabitatGenTipo, HabitatGeneral, HabitatTipo) %>%
+  arrange(HabitatGeneral) %>%
+  arrange(HabitatTipo) %>%
+  count(HabitatGenTipo)
+
+# https://wilkelab.org/ggtext/index.html
+habitats_conteo2 <- ptos %>%
+  select(HabitatGeneral) %>%
+  arrange(HabitatGeneral) %>%
+  count(HabitatGeneral) %>%
+  mutate(HabitatGeneral = as.factor(HabitatGeneral),
+         NombreCategoria = c('Arbolados','Arbustivos','Herbáceos','Acuáticos','Agrícolas','Humanizados'),
+         NombreCategoria = factor(NombreCategoria),
+         NombreCategoria = reorder(NombreCategoria, n),
+         icon = c('images/arboles.png','images/arbusto.png','images/prado.png', 'images/agua.png','images/agricola.png','images/humano.png'),
+         etiqueta = paste0(NombreCategoria,"  ", "<img src='",icon,"' width='30' />"))
+
+ggplot(habitats_conteo2, aes(x=n, y=NombreCategoria))+
+  geom_col(fill = "skyblue", width=0.5)+
+  labs(x="Número de grabadoras", y="")+
+  geom_text(aes(label=n, hjust=-1), size=4, colour="skyblue")+
+  scale_x_continuous(expand = expansion(mult = c(0, 0.1)))+
+  scale_y_discrete(name=NULL, labels=habitats_conteo2$etiqueta)+
+  theme_light()+
+  theme(
+    panel.grid.major.x = element_line(colour="#EBEBEB"),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.x = element_line(colour="#EBEBEB"), 
+    panel.grid.minor.y = element_blank(),
+    panel.border = element_blank(), 
+    plot.title = element_text(face = "bold", size = 12, hjust = 0.5),
+    axis.text.y = element_markdown(color= 'black', size = 10))
+```
+
+```{r graf_habitats2, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE, out.width = "100%"}
+library(dplyr)
+library(highcharter)
+library(htmltools)
+
+habitats_conteo2 <- ptos %>%
+  select(HabitatGeneral) %>%
+  arrange(HabitatGeneral) %>%
+  count(HabitatGeneral) %>%
+  mutate(HabitatGeneral = as.factor(HabitatGeneral),
+         NombreCategoria = c('Arbolados','Arbustivos','Herbáceos','Acuáticos','Agrícolas','Humanizados'),
+         NombreCategoria = factor(NombreCategoria),
+         NombreCategoria = reorder(NombreCategoria, n),
+         icon = c('images/arboles.png','images/arbusto.png','images/prado.png', 'images/agua.png','images/agricola.png','images/humano.png'),
+         etiqueta = paste0(NombreCategoria,"  ", "<img src='",icon,"' width='30' />")) %>%
+  arrange(desc(n))
+
+highchart() %>%
+  hc_chart(type = "bar", styledMode = FALSE) %>%
+  hc_xAxis(
+    categories = habitats_conteo2$NombreCategoria,
+    labels = list(
+      useHTML = TRUE,
+      y = 3,
+      formatter = JS("
+        function() {
+          const icons = {
+            'Arbolados': 'images/arboles.png',
+            'Arbustivos': 'images/arbusto.png',
+            'Herbáceos': 'images/prado.png',
+            'Acuáticos': 'images/agua.png',
+            'Agrícolas': 'images/agricola.png',
+            'Humanizados': 'images/humano.png'
+          };
+      
+          var category = this.value;
+          var icon = icons[category];
+      
+          if(icon) {
+          return '<span>' + category + '</span><br><img src=\"' + icon + '\" style=\"width:40px;\" />';
+        } else {
+          return category;
+        }
+      }
+    "),
+      style = list(fontSize = "0.8em")
+      )
+    )%>%
+  hc_add_series(
+    name = "2025",
+    data = habitats_conteo2$n,
+    color = "skyblue") %>%
+  hc_plotOptions(
+    bar = list(
+      pointPadding = 0.2,
+      borderWidth = 0)) %>%
+  hc_tooltip(
+    useHTML = TRUE,
+    formatter = JS("function() {return '<b>' + this.y + '</b>';}")) %>%
+  hc_yAxis(min=0, max=70, title = list(text = "Número de grabadoras"))
+```
+
+## Comunidades autónomas
+
+```{r graf_ccaas, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, out.width = "100%", fig.show='hide'}
+#nuevos datos solo con las columnas que me interesan
+ccaas <- ptos %>%
+  select(CCAA) %>%
+  count(CCAA) %>%
+  mutate(
+    CCAA = reorder(CCAA, n))
+
+ggplot(ccaas, aes(x=n, y=CCAA))+
+  geom_col(fill = "seagreen3", width=0.5)+
+  labs(x="Número de grabadoras", y="")+
+  geom_text(aes(label=n, hjust=-1), size=4, colour="seagreen3")+
+  scale_x_continuous(expand = expansion(mult = c(0, 0.1)))+
+  theme_light()+
+  theme(
+    panel.grid.major.x = element_line(colour="#EBEBEB"),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.x = element_line(colour="#EBEBEB"), 
+    panel.grid.minor.y = element_blank(),
+    panel.border = element_blank(),
+    axis.text.y = element_text(size = 10),
+    plot.title = element_text(face = "bold", size = 12, hjust = 0.5))
+```
+
+```{r graf_ccaas2, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, out.width = "100%"}
+#nuevos datos solo con las columnas que me interesan
+ccaas <- ptos %>%
+  select(CCAA) %>%
+  count(CCAA) %>%
+  mutate(
+    CCAA = reorder(CCAA, n)) %>%
+  arrange(desc(n))
+
+highchart() %>%
+  hc_chart(type = "bar") %>%
+  hc_xAxis(
+    categories = ccaas$CCAA,
+    labels = list(
+      useHTML = TRUE,
+      y = 2,
+      style = list(fontSize = "0.8em")
+      )
+    )%>%
+  hc_add_series(
+    name = "2025",
+    data = ccaas$n,
+    color = "#43cd80") %>%
+  hc_plotOptions(
+    bar = list(
+      pointPadding = 0.2,
+      borderWidth = 0)) %>%
+  hc_tooltip(
+    useHTML = TRUE,
+    formatter = JS("function() {return '<b>' + this.y + '</b>';}")) %>%
+  hc_yAxis(min=0, max=40, title = list(text = "Número de grabadoras"))
+```
