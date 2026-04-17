@@ -221,10 +221,10 @@ leaflet() %>%
 
 library(forcats)
 library(stringr)
-library(ggimage)
-library(ggtext)
-library(ggplot2)
-library(gapminder)
+#library(ggimage)
+#library(ggtext)
+#library(ggplot2)
+#library(gapminder)
 
 #nuevos datos solo con las columnas que me interesan
 habitats_conteo <- ptos %>%
@@ -263,9 +263,7 @@ ggplot(habitats_conteo2, aes(x=n, y=NombreCategoria))+
 ```
 
 ```{r graf_habitats2, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE, out.width = "100%"}
-library(dplyr)
 library(highcharter)
-library(htmltools)
 
 habitats_conteo2 <- ptos %>%
   select(HabitatGeneral) %>%
