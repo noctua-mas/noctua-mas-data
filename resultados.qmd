@@ -216,53 +216,7 @@ leaflet() %>%
 
 ## Hábitats
 
-```{r graf_habitats, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE, out.width = "100%", fig.show='hide'}
-# gráfico hábitats
-
-library(forcats)
-library(stringr)
-#library(ggimage)
-#library(ggtext)
-#library(ggplot2)
-#library(gapminder)
-
-#nuevos datos solo con las columnas que me interesan
-habitats_conteo <- ptos %>%
-  select(HabitatGenTipo, HabitatGeneral, HabitatTipo) %>%
-  arrange(HabitatGeneral) %>%
-  arrange(HabitatTipo) %>%
-  count(HabitatGenTipo)
-
-# https://wilkelab.org/ggtext/index.html
-habitats_conteo2 <- ptos %>%
-  select(HabitatGeneral) %>%
-  arrange(HabitatGeneral) %>%
-  count(HabitatGeneral) %>%
-  mutate(HabitatGeneral = as.factor(HabitatGeneral),
-         NombreCategoria = c('Arbolados','Arbustivos','Herbáceos','Acuáticos','Agrícolas','Humanizados'),
-         NombreCategoria = factor(NombreCategoria),
-         NombreCategoria = reorder(NombreCategoria, n),
-         icon = c('images/arboles.png','images/arbusto.png','images/prado.png', 'images/agua.png','images/agricola.png','images/humano.png'),
-         etiqueta = paste0(NombreCategoria,"  ", "<img src='",icon,"' width='30' />"))
-
-ggplot(habitats_conteo2, aes(x=n, y=NombreCategoria))+
-  geom_col(fill = "skyblue", width=0.5)+
-  labs(x="Número de grabadoras", y="")+
-  geom_text(aes(label=n, hjust=-1), size=4, colour="skyblue")+
-  scale_x_continuous(expand = expansion(mult = c(0, 0.1)))+
-  scale_y_discrete(name=NULL, labels=habitats_conteo2$etiqueta)+
-  theme_light()+
-  theme(
-    panel.grid.major.x = element_line(colour="#EBEBEB"),
-    panel.grid.major.y = element_blank(),
-    panel.grid.minor.x = element_line(colour="#EBEBEB"), 
-    panel.grid.minor.y = element_blank(),
-    panel.border = element_blank(), 
-    plot.title = element_text(face = "bold", size = 12, hjust = 0.5),
-    axis.text.y = element_markdown(color= 'black', size = 10))
-```
-
-```{r graf_habitats2, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE, out.width = "100%"}
+```{r graf_habitats, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE, out.width = "100%"}
 library(highcharter)
 
 habitats_conteo2 <- ptos %>%
@@ -323,30 +277,6 @@ highchart() %>%
 ```
 
 ## Comunidades autónomas
-
-```{r graf_ccaas, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, out.width = "100%", fig.show='hide'}
-#nuevos datos solo con las columnas que me interesan
-ccaas <- ptos %>%
-  select(CCAA) %>%
-  count(CCAA) %>%
-  mutate(
-    CCAA = reorder(CCAA, n))
-
-ggplot(ccaas, aes(x=n, y=CCAA))+
-  geom_col(fill = "seagreen3", width=0.5)+
-  labs(x="Número de grabadoras", y="")+
-  geom_text(aes(label=n, hjust=-1), size=4, colour="seagreen3")+
-  scale_x_continuous(expand = expansion(mult = c(0, 0.1)))+
-  theme_light()+
-  theme(
-    panel.grid.major.x = element_line(colour="#EBEBEB"),
-    panel.grid.major.y = element_blank(),
-    panel.grid.minor.x = element_line(colour="#EBEBEB"), 
-    panel.grid.minor.y = element_blank(),
-    panel.border = element_blank(),
-    axis.text.y = element_text(size = 10),
-    plot.title = element_text(face = "bold", size = 12, hjust = 0.5))
-```
 
 ```{r graf_ccaas2, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, out.width = "100%"}
 #nuevos datos solo con las columnas que me interesan
