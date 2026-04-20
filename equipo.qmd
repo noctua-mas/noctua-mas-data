@@ -9,7 +9,7 @@ lang: es
 ::::: column
 :::: card-equipo
 ::: {style="display: flex; justify-content: left; align-items: left; padding-top: 10px;"}
-![](images/uam-solo.png){width="auto"}
+<img src="images/uam-solo.png" style="width:auto; height:70px;"/>
 :::
 
 #### Equipo de trabajo en la <a href="https://www.uam.es/" target="_blank">UAM</a>:
