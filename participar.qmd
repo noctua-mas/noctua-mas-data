@@ -5,7 +5,7 @@ lang: es
 
 ## Ponte en contacto
 
-Si quieres participar, ponte en contacto con las personas responsables del programa NOCTUA (Virginia Escandell y Juan Carlos del Moral):
+Si quieres participar, ponte en contacto con las personas responsables del programa NOCTUA (Emilio Escudero):
 
 ![](images/email.png){style="vertical-align: text-top; margin-right: 7px;" width="25"} [noctua\@seo.org](mailto:noctua@seo.org){.email}
 
@@ -13,7 +13,7 @@ Si quieres participar, ponte en contacto con las personas responsables del progr
 
 ## ¿En qué consiste el programa y qué implica la participación?
 
-El programa NOCTUA+ realiza una **campaña anual que comienza cada noviembre**. Invitamos a todas aquellas personas amantes de la naturaleza que quieran sumarse a la iniciativa. Si te interesa participar, puedes inscribirte como voluntario o voluntaria del programa:
+El programa NOCTUA+ realiza una **campaña anual que comienza cada diciembre**. Invitamos a todas aquellas personas amantes de la naturaleza que quieran sumarse a la iniciativa. Si te interesa participar, puedes inscribirte como voluntario o voluntaria del programa:
 
 -   En diciembre, **recibirás una grabadora** para uno o varios de los puntos de muestreo que tengas asignado en el programa NOCTUA (según disponibilidad).
 

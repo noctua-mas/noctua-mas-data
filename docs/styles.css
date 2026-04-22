@@ -55,6 +55,12 @@ h4 {
   box-shadow: 0 6px 16px rgba(0,0,0,0.4);
 }
 
+@media (max-width: 768px) {  /* una columna de objetivos en el movil */
+  .contenedor-botones-inicio {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* columnas más info---------------------------*/
 .contenedor-info-inicio {
   display: grid;
@@ -100,14 +106,31 @@ h4 {
   text-align: center;
 }
 
+@media (max-width: 768px) {  /* una columna de objetivos en el movil */
+  .contenedor-info-inicio {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* MAP-----------------------------------------*/
 .contenedor-map {
   display: flex;
-  align-items: center;
+  align-items: top;
   gap: 20px;
 }
 .contenedor-map img {
   height: 200px;
+}
+
+@media (max-width: 768px) {
+  .contenedor-map {
+    flex-direction: column;
+    align-items: center; /* opcional, para centrar el contenido */
+  }
+  .contenedor-map img {
+    height: auto; /* ajusta la altura automáticamente en modo columna */
+    max-width: 80%; /* asegura que la imagen no se desborde en pantallas pequeñas */
+  }
 }
 
 /* columnas equipo-----------------------------*/
