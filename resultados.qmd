@@ -69,7 +69,7 @@ popup_html_25 <- ptos_con_UTM_25 %>%
       fin       <- FechaFinGrabacionMuestreo
       noches    <- Dias_Grabados_Campo
       habitat   <- Habitat
-      grabadora <- Grabadora.ID
+      # grabadora <- Grabadora.ID
       
       # Columnas con ancho mínimo
       columnas <- paste0("<th style='padding:4px 12px; min-width:100px;'>", puntos, "</th>", collapse = "")
@@ -79,7 +79,7 @@ popup_html_25 <- ptos_con_UTM_25 %>%
       fila_fin       <- paste0("<td style='padding:4px 12px; min-width:100px;'>", fin, "</td>", collapse = "")
       fila_noches    <- paste0("<td style='padding:4px 12px; min-width:100px;'>", noches, "</td>", collapse = "")
       fila_habitat   <- paste0("<td style='padding:4px 12px; min-width:100px;'>", habitat, "</td>", collapse = "")
-      fila_grabadora <- paste0("<td style='padding:4px 12px; min-width:100px;'>", grabadora, "</td>", collapse = "")
+      # fila_grabadora <- paste0("<td style='padding:4px 12px; min-width:100px;'>", grabadora, "</td>", collapse = "")
       
       # Tabla envuelta en un div con scroll horizontal
       paste0(
@@ -91,7 +91,7 @@ popup_html_25 <- ptos_con_UTM_25 %>%
         "<tr><th style='padding:4px 12px;'>Inicio</th>", fila_inicio, "</tr>",
         "<tr><th style='padding:4px 12px;'>Fin</th>", fila_fin, "</tr>",
         "<tr><th style='padding:4px 12px;'>Nº noches</th>", fila_noches, "</tr>",
-        "<tr><th style='padding:4px 12px;'>ID grabadora</th>", fila_grabadora, "</tr>",
+        # "<tr><th style='padding:4px 12px;'>ID grabadora</th>", fila_grabadora, "</tr>",
         "</table>",
         "</div>"
       )
