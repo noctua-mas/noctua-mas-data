@@ -12,12 +12,14 @@ library(htmltools)
 library(sf)
 library(dplyr)
 library(stringr)
+library(naniar)
 ```
 
 ```{r setup, echo=FALSE}
 ptos <- read.csv("datos/noctua_habitats.csv", sep = ",", header = T)
 ptos <- ptos %>%
-  mutate(PuntoMuestreo = gsub("_", " ", PuntoMuestreo))
+  mutate(PuntoMuestreo = gsub("_", " ", PuntoMuestreo),
+         replace_with_na_at(.vars = c('HabitatDetalle','HabitatMatorral'), condition = ~.x == -99))
     # FechaInicioGrabacionMuestreo = as.Date(FechaInicioGrabacionMuestreo),
     # FechaInicioGrabacionMuestreo = format(FechaInicioGrabacionMuestreo, "%d/%m/%Y"),
     # FechaFinGrabacionMuestreo = as.Date(FechaFinGrabacionMuestreo),
@@ -78,7 +80,7 @@ popup_html_25 <- ptos_con_UTM_25 %>%
       fila_inicio    <- paste0("<td style='padding:4px 12px; min-width:100px;'>", inicio, "</td>", collapse = "")
       fila_fin       <- paste0("<td style='padding:4px 12px; min-width:100px;'>", fin, "</td>", collapse = "")
       fila_noches    <- paste0("<td style='padding:4px 12px; min-width:100px;'>", noches, "</td>", collapse = "")
-      fila_habitat   <- paste0("<td style='padding:4px 12px; min-width:100px;'>", habitat, "</td>", collapse = "")
+      fila_habitat   <- paste0("<td style='padding:4px 12px; min-width:100px;'>", glue("{ptos$HabitatGeneral}, '_', {ptos$HabitatTipo}"), "</td>", collapse = "")
       # fila_grabadora <- paste0("<td style='padding:4px 12px; min-width:100px;'>", grabadora, "</td>", collapse = "")
       
       # Tabla envuelta en un div con scroll horizontal
